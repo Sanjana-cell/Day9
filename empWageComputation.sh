@@ -29,5 +29,11 @@ do
 	dailyWage[totalWorkingDays]=$(($workHours*$WAGE_PER_HOUR))
 	((totalWorkingDays++))
 done
+
+for((i=0; i<20; i++ ))
+do
+	echo "Daily Wage " $(($i+1)) "= " ${dailyWage[i]}
+done
+
 totalWages=$(($totalWorkingHrs*$WAGE_PER_HOUR))
 echo "Total Wages " $totalWages
