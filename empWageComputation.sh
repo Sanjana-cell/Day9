@@ -11,7 +11,7 @@ MAX_WORKING_HRS=100
 workhours=0
 attendence=0
 counter=0
-totalWorkingDays=1
+totalWorkingDays=0
 totalWorkingHrs=0
 totalWages=0
 function getWorkingHours(){
@@ -26,6 +26,7 @@ while [  $totalWorkingDays -lt $MAX_WORKING_DAYS ] && [  $totalWorkingHrs -lt $M
 do
 	workHours="$( getWorkingHours $((RANDOM%3+1)) )"
 	totalWorkingHrs=$(($totalWorkingHrs+$workHours))
+	dailyWage[totalWorkingDays]=$(($workHours*$WAGE_PER_HOUR))
 	((totalWorkingDays++))
 done
 totalWages=$(($totalWorkingHrs*$WAGE_PER_HOUR))
