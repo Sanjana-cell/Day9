@@ -14,19 +14,19 @@ counter=0
 totalWorkingDays=1
 totalWorkingHrs=0
 totalWages=0
-
+function getWorkingHours(){
+        case $1 in
+                $IS_PART_TIME)  workHours=4;;
+                $IS_FULL_TIME)  workHours=8;;
+                *)              workHours=0;;
+        esac
+        echo $workHours
+}
 while [  $totalWorkingDays -lt $MAX_WORKING_DAYS ] && [  $totalWorkingHrs -lt $MAX_WORKING_HRS ]
 do
-	attendence=$(($RANDOM%2+1))
-	case $attendence in
-        	$IS_PART_TIME)  workHours=4;;
-        	$IS_FULL_TIME)  workHours=8;;
-        	*)              workHours=0;;
-	esac
-	dailyWage=$(($workHours*$WAGE_PER_HOUR))
-	totalWages=$(($totalWages+$dailyWage))
-	echo "DailyWage on $totalWorkingDays" $dailyWage
+	workHours="$( getWorkingHours $((RANDOM%3+1)) )"
 	totalWorkingHrs=$(($totalWorkingHrs+$workHours))
 	((totalWorkingDays++))
 done
+totalWages=$(($totalWorkingHrs*$WAGE_PER_HOUR))
 echo "Total Wages " $totalWages
